@@ -10,11 +10,20 @@ package model;
  */
 public class Course {
 
+    private int subjectID;
     private String subjectCode;
     private String subjectName;
     private int courseSession;
     private String courseType;
     private String courseDescription;
+
+    public int getSubjectID() {
+        return subjectID;
+    }
+
+    public void setSubjectID(int subjectID) {
+        this.subjectID = subjectID;
+    }
 
     public String getSubjectCode() {
         return subjectCode;
@@ -55,6 +64,5 @@ public class Course {
     public void setCourseDescription(String courseDescription) {
         this.courseDescription = courseDescription;
     }
-    
-    
+
 }

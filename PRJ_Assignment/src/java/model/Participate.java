@@ -9,6 +9,8 @@ package model;
  * @author ADMIN
  */
 public class Participate {
+    
+    private int id;
     private String Status;
     private String timeRecord;
     private Student stu;
@@ -45,6 +47,12 @@ public class Participate {
     public void setLesson(LLS lesson) {
         this.lesson = lesson;
     }
-    
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

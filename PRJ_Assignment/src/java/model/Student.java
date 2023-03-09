@@ -19,6 +19,7 @@ public class Student {
     private int contact;
     private boolean gender;
     private Date dob;
+    private Group group;
 
     public String getId() {
         return id;
@@ -75,6 +76,13 @@ public class Student {
     public void setDob(Date dob) {
         this.dob = dob;
     }
-    
-    
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
 }

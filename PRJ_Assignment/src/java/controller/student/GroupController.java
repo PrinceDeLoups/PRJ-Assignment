@@ -4,11 +4,19 @@
  */
 package controller.student;
 
+import dal.CourseDBContext;
+import dal.DBContext;
+import dal.GroupDBContext;
+import dal.StudentDBContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import model.Course;
+import model.Group;
+import model.Student;
 
 /**
  *
@@ -17,28 +25,39 @@ import jakarta.servlet.http.HttpServletResponse;
 public class GroupController extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-                processRequest(request, response);
+        processRequest(req, resp);
 
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-                processRequest(request, response);
+        processRequest(req, resp);
 
     }
-    
-      private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        DBContext<Student> db = new StudentDBContext();
-//        ArrayList<Student> students = db.all();
+
+    private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        StudentDBContext db = new StudentDBContext();
+//        ArrayList<Student> students = db.search(raw_course, raw_class);
 //        req.setAttribute("students", students);
-//
-//        DBContext<Department> db1 = new DeptDBContext();
-//        ArrayList<Department> depts = db1.all();
-//        req.setAttribute("depts", depts);
-        req.getRequestDispatcher("../view/student/group.jsp").forward(req, resp);
-    }
+        DBContext<Course> cb = new CourseDBContext();
+        ArrayList<Course> courses = cb.all();
+        req.setAttribute("courses", courses);
 
+        DBContext<Group> gb = new GroupDBContext();
+        ArrayList<Group> groups = gb.all();
+        req.setAttribute("groups", groups);
+        String raw_course = req.getParameter("course");
+        String raw_classe = req.getParameter("class");
+        if (raw_course != null && raw_classe != null) {
+            int course = Integer.parseInt(raw_course);
+            int classe = Integer.parseInt(raw_classe);
+            ArrayList<Student> students = db.search(course, classe);
+            req.setAttribute("students", students);
+        }
+        req.getRequestDispatcher("../view/student/group.jsp").forward(req, resp);
+
+    }
 }

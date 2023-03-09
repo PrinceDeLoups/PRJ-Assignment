@@ -9,10 +9,11 @@ package model;
  * @author ADMIN
  */
 public class LLS {
-
+    
+    private int LLSid;
     private int lessonNum;
     private String lessonName;
-    private Group group;
+    private CIS cis;
     private Room room;
     private TimeSlot slot;
 
@@ -31,15 +32,7 @@ public class LLS {
     public void setLessonName(String lessonName) {
         this.lessonName = lessonName;
     }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
+    
     public Room getRoom() {
         return room;
     }
@@ -55,5 +48,23 @@ public class LLS {
     public void setSlot(TimeSlot slot) {
         this.slot = slot;
     }
+
+    public int getLLSid() {
+        return LLSid;
+    }
+
+    public void setLLSid(int LLSid) {
+        this.LLSid = LLSid;
+    }
+
+    public CIS getCis() {
+        return cis;
+    }
+
+    public void setCis(CIS cis) {
+        this.cis = cis;
+    }
+    
+    
 
 }

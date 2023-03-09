@@ -34,11 +34,12 @@ public class CourseDBContext extends DBContext {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT [SubjectCode], [SubjectName], [CourseSessionNumber], [CourseSessionType], [CourseSessionDescription]  FROM Course";
+            String sql = "SELECT [SubjectID],[SubjectCode], [SubjectName], [CourseSessionNumber], [CourseSessionType], [CourseSessionDescription]  FROM Course";
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
                 Course c = new Course();
+                c.setSubjectID(rs.getInt("SubjectID"));
                 c.setSubjectCode(rs.getString("SubjectCode"));
                 c.setSubjectName(rs.getString("SubjectName"));
                 c.setCourseSession(rs.getInt("CourseSessionNumber"));

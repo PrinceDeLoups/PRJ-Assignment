@@ -10,42 +10,22 @@ package model;
  */
 public class Group {
 
-    private String groupID;
-    private Course cours;
-    private Student stu;
-    private Instructor instruct;
+    private int groupID;
+    private String groupName;
 
-    public String getGroupID() {
+    public int getGroupID() {
         return groupID;
     }
 
-    public void setGroupID(String groupID) {
+    public void setGroupID(int groupID) {
         this.groupID = groupID;
     }
 
-    public Course getCours() {
-        return cours;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setCours(Course cours) {
-        this.cours = cours;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
-
-    public Student getStu() {
-        return stu;
-    }
-
-    public void setStu(Student stu) {
-        this.stu = stu;
-    }
-
-    public Instructor getInstruct() {
-        return instruct;
-    }
-
-    public void setInstruct(Instructor instruct) {
-        this.instruct = instruct;
-    }
-    
-    
 }
