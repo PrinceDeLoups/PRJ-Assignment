@@ -4,39 +4,40 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ADMIN
  */
 public class TimeSlot {
-    
-    private int slotNumber;
-    private String timeStart;
-    private String timeEnd;
 
-    public int getSlotNumber() {
-        return slotNumber;
+    private int id;
+    private String name;
+    private ArrayList<Session> sessions = new ArrayList<>();
+
+    public int getId() {
+        return id;
     }
 
-    public void setSlotNumber(int slotNumber) {
-        this.slotNumber = slotNumber;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTimeStart() {
-        return timeStart;
+    public String getName() {
+        return name;
     }
 
-    public void setTimeStart(String timeStart) {
-        this.timeStart = timeStart;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTimeEnd() {
-        return timeEnd;
+    public ArrayList<Session> getSessions() {
+        return sessions;
     }
 
-    public void setTimeEnd(String timeEnd) {
-        this.timeEnd = timeEnd;
+    public void setSessions(ArrayList<Session> sessions) {
+        this.sessions = sessions;
     }
-    
-    
+
 }

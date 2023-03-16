@@ -16,7 +16,7 @@ import model.TimeSlot;
  *
  * @author ADMIN
  */
-public class SlotDBContext extends DBContext{
+public class SlotDBContext extends DBContext {
 
     @Override
     public void insert(Object model) {
@@ -30,35 +30,28 @@ public class SlotDBContext extends DBContext{
 
     @Override
     public ArrayList<TimeSlot> all() {
-           ArrayList<TimeSlot> slots = new ArrayList<>();
+        ArrayList<TimeSlot> slots = new ArrayList<>();
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT [SlotNumber], [TimeStart], [TimeEnd] FROM TimeSlot";
+            String sql = "SELECT [tid]\n"
+                    + "      ,[description]\n"
+                    + "  FROM [TimeSlot]";
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
-                TimeSlot ts = new TimeSlot();
-                ts.setSlotNumber(rs.getInt("SlotNumber"));
-                ts.setTimeStart(rs.getString("TimeStart"));
-                ts.setTimeEnd(rs.getString("TimeEnd"));
-                slots.add(ts);
+                TimeSlot d = new TimeSlot();
+                d.setId(rs.getInt("tid"));
+                d.setName(rs.getString("description"));
+                slots.add(d);
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(SlotDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 rs.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(SlotDBContext.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            try {
                 stm.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(SlotDBContext.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
                 connection.close();
             } catch (SQLException ex) {
                 Logger.getLogger(SlotDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,5 +59,5 @@ public class SlotDBContext extends DBContext{
         }
         return slots;
     }
-    
+
 }

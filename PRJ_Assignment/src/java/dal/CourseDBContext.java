@@ -34,37 +34,82 @@ public class CourseDBContext extends DBContext {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT [SubjectID],[SubjectCode], [SubjectName], [CourseSessionNumber], [CourseSessionType], [CourseSessionDescription]  FROM Course";
+            String sql = "SELECT cid, ccode, cname FROM Course";
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
                 Course c = new Course();
-                c.setSubjectID(rs.getInt("SubjectID"));
-                c.setSubjectCode(rs.getString("SubjectCode"));
-                c.setSubjectName(rs.getString("SubjectName"));
-                c.setCourseSession(rs.getInt("CourseSessionNumber"));
-                c.setCourseType(rs.getString("CourseSessionType"));
-                c.setCourseDescription(rs.getString("CourseSessionDescription"));
+                c.setId(rs.getInt("cid"));
+                c.setCode(rs.getString("ccode"));
+                c.setName(rs.getString("cname"));
+
                 courses.add(c);
             }
+
         } catch (SQLException ex) {
-            Logger.getLogger(CourseDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 rs.close();
             } catch (SQLException ex) {
-                Logger.getLogger(CourseDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             try {
                 stm.close();
             } catch (SQLException ex) {
-                Logger.getLogger(CourseDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
                 connection.close();
             } catch (SQLException ex) {
-                Logger.getLogger(CourseDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return courses;
+    }
+
+    public ArrayList<Course> getStdCourse(int sid) {
+        ArrayList<Course> courses = new ArrayList<>();
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT c.cid, c.ccode, c.cname FROM Course c\n"
+                    + "INNER JOIN Group_Course gc ON c.cid = gc.cid\n"
+                    + "INNER JOIN [Group] g ON g.gid = gc.gid\n"
+                    + "INNER JOIN Student_Group sg ON sg.gid = g.gid\n"
+                    + "INNER JOIN Student s ON sg.sid = s.sid\n"
+                    + "WHERE s.sid = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, sid);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Course c = new Course();
+                c.setId(rs.getInt("cid"));
+                c.setCode(rs.getString("ccode"));
+                c.setName(rs.getString("cname"));
+
+                courses.add(c);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                stm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return courses;

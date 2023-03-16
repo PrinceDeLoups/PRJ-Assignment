@@ -4,65 +4,58 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ADMIN
  */
 public class Course {
 
-    private int subjectID;
-    private String subjectCode;
-    private String subjectName;
-    private int courseSession;
-    private String courseType;
-    private String courseDescription;
+    private int id;
+    private String code;
+    private String name;
+    private ArrayList<Group> groups = new ArrayList<>();
+    private ArrayList<Session> sessions = new ArrayList<>();
 
-    public int getSubjectID() {
-        return subjectID;
+    public int getId() {
+        return id;
     }
 
-    public void setSubjectID(int subjectID) {
-        this.subjectID = subjectID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getSubjectCode() {
-        return subjectCode;
+    public String getName() {
+        return name;
     }
 
-    public void setSubjectCode(String subjectCode) {
-        this.subjectCode = subjectCode;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSubjectName() {
-        return subjectName;
+    public ArrayList<Group> getGroups() {
+        return groups;
     }
 
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
+    public void setGroups(ArrayList<Group> groups) {
+        this.groups = groups;
     }
 
-    public int getCourseSession() {
-        return courseSession;
+    public String getCode() {
+        return code;
     }
 
-    public void setCourseSession(int courseSession) {
-        this.courseSession = courseSession;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getCourseType() {
-        return courseType;
+    public ArrayList<Session> getSessions() {
+        return sessions;
     }
 
-    public void setCourseType(String courseType) {
-        this.courseType = courseType;
-    }
-
-    public String getCourseDescription() {
-        return courseDescription;
-    }
-
-    public void setCourseDescription(String courseDescription) {
-        this.courseDescription = courseDescription;
+    public void setSessions(ArrayList<Session> sessions) {
+        this.sessions = sessions;
     }
 
 }

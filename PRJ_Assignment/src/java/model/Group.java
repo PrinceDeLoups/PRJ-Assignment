@@ -4,28 +4,49 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ADMIN
  */
 public class Group {
 
-    private int groupID;
-    private String groupName;
+    private int id;
+    private String name;
+    private ArrayList<Course> courses = new ArrayList<>();
+    private ArrayList<Session> sessions = new ArrayList<>();
 
-    public int getGroupID() {
-        return groupID;
+    public int getId() {
+        return id;
     }
 
-    public void setGroupID(int groupID) {
-        this.groupID = groupID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public String getName() {
+        return name;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public ArrayList<Session> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(ArrayList<Session> sessions) {
+        this.sessions = sessions;
+    }
+
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(ArrayList<Course> courses) {
+        this.courses = courses;
+    }
+
 }

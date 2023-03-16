@@ -4,60 +4,80 @@
  */
 package controller.student;
 
+import controller.authentication.BaseRequiredAuthenticatedController;
+import dal.CampusDBContext;
 import dal.CourseDBContext;
 import dal.DBContext;
 import dal.GroupDBContext;
+import dal.LecturerDBContext;
 import dal.StudentDBContext;
+import dal.UserDBContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import model.Account;
+import model.Campus;
 import model.Course;
 import model.Group;
+import model.Lecturer;
 import model.Student;
 
 /**
  *
  * @author ADMIN
  */
-public class GroupController extends HttpServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        processRequest(req, resp);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        processRequest(req, resp);
-
-    }
+public class GroupController extends BaseRequiredAuthenticatedController {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        StudentDBContext db = new StudentDBContext();
-//        ArrayList<Student> students = db.search(raw_course, raw_class);
-//        req.setAttribute("students", students);
+        int a = (int) req.getSession().getAttribute("id");
+
+        UserDBContext udb = new UserDBContext();
+        Account acc = udb.getUser(a);
+        req.setAttribute("role", a);
+        if (acc.isRole() == true) {
+            StudentDBContext studb = new StudentDBContext();
+            ArrayList<Student> stu = studb.getStdCode(a);
+            req.setAttribute("stu", stu);
+        }else{
+            LecturerDBContext lecdb = new LecturerDBContext();
+            ArrayList<Lecturer> lect = lecdb.getStdCode(a);
+            req.setAttribute("lect", lect);
+        }
+
+        CampusDBContext camp = new CampusDBContext();
+        ArrayList<Campus> camps = camp.search(a);
+        req.setAttribute("camps", camps);
+
         DBContext<Course> cb = new CourseDBContext();
         ArrayList<Course> courses = cb.all();
         req.setAttribute("courses", courses);
-
-        DBContext<Group> gb = new GroupDBContext();
-        ArrayList<Group> groups = gb.all();
-        req.setAttribute("groups", groups);
         String raw_course = req.getParameter("course");
         String raw_classe = req.getParameter("class");
-        if (raw_course != null && raw_classe != null) {
+        if (raw_course != null) {
             int course = Integer.parseInt(raw_course);
+            GroupDBContext gb = new GroupDBContext();
+            ArrayList<Group> groups = gb.search(course);
+            req.setAttribute("groups", groups);
+            req.setAttribute("raw_course", raw_course);
+        }
+        if (raw_course == null && raw_classe != null) {
             int classe = Integer.parseInt(raw_classe);
-            ArrayList<Student> students = db.search(course, classe);
+            StudentDBContext db = new StudentDBContext();
+            ArrayList<Student> students = db.search(classe);
             req.setAttribute("students", students);
         }
         req.getRequestDispatcher("../view/student/group.jsp").forward(req, resp);
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response, Account acc) throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response, Account acc) throws ServletException, IOException {
+        processRequest(request, response);
     }
 }

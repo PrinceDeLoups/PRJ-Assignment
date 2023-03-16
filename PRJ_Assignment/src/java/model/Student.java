@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,21 +13,32 @@ import java.sql.Date;
  */
 public class Student {
 
-    private String id;
+    private int id;
+    private String code;
     private String name;
     private String img;
     private String email;
     private int contact;
     private boolean gender;
     private Date dob;
-    private Group group;
+    private Account account;
+    private Attendance attendance;
+    ArrayList<Group> groups = new ArrayList<>();
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -77,12 +89,28 @@ public class Student {
         this.dob = dob;
     }
 
-    public Group getGroup() {
-        return group;
+    public ArrayList<Group> getGroups() {
+        return groups;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setGroups(ArrayList<Group> groups) {
+        this.groups = groups;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
     }
 
 }
