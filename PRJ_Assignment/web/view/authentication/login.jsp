@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>HTML5 Login Form with validation Example</title>
+        <title></title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
         <link href="view/style.css" rel="stylesheet" type="text/css"/>
     </head>
