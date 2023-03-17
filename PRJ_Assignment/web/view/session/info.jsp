@@ -7,17 +7,32 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="/WEB-INF/tlds/dateTag.tld" prefix="my"%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style type="text/css">
+            a {
+                color: blue;
+                text-decoration: none;
+            }
+            a:hover {
+                color: black;
+                text-decoration: underline;
+            }
+            a:active {
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <div class="container" style="margin-left: 200px">
             <div class="row" style="display: flex">
                 <div class="col-md-8" style="margin-left: 200px">
-                    <h1><span>FPT University Academic Portal</span></h1>
+                    <h1><span style="text-shadow: -5px 5px 4px #ec9b19;">FPT University Academic Portal</span></h1>
                 </div>
                 <div class="col-md-4" style="margin-left: 400px">
                     <table>
@@ -39,12 +54,12 @@
                 <div class="col-md-6" style="text-align: left; display: flex">
                     <c:if test="${requestScope.stu ne null}">
                         <c:forEach items="${requestScope.stu}" var="s" varStatus="loop">          
-                            <a style="margin-left: 20px;" href="../timetable"><h3 style="margin-top: 8px; color: blue"><strong>Timetable</strong></h3></a>
+                            <a style="margin-left: 20px;" href="../timetable"><h3 style="margin-top: 8px"><strong>Timetable</strong></h3></a>
                         </c:forEach>
                     </c:if>
                     <c:if test="${requestScope.lect ne null}">
                         <c:forEach items="${requestScope.lect}" var="s" varStatus="loop">          
-                            <a style="margin-left: 20px;" href="../schedule"><h3 style="margin-top: 8px; color: blue"><strong>Schedule</strong></h3></a>
+                            <a style="margin-left: 20px;" href="../schedule"><h3 style="margin-top: 8px"><strong>Schedule</strong></h3></a>
                         </c:forEach>
                     </c:if>
                     <h3 style="margin-top: 8px; margin-left: 20px"><strong>| View</strong></h3></a>               
@@ -89,19 +104,19 @@
                                     <c:forEach items="${requestScope.sessions}" var="s" varStatus="loop">
                                         <tr>
                                             <td style="width: 550px; border-bottom: solid lightgray 1px"><b>Date:</b></td>
-                                            <td style="width: 550px; border-bottom: solid lightgray 1px"><fmt:formatDate value="${s.date}" pattern="EEEE"/> - <fmt:formatDate value="${s.date}" type="date"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td style=" border-bottom: solid lightgray 1px"><b>Slot:</b></td>
-                                            <td style=" border-bottom: solid lightgray 1px">${s.slot.id}</td>
+                                            <td style="width: 550px; border-bottom: solid lightgray 1px"><my:dateTag value="${s.date}" type="EEEE"></my:dateTag> <my:dateTag value="${s.date}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style=" border-bottom: solid lightgray 1px"><b>Slot:</b></td>
+                                                <td style=" border-bottom: solid lightgray 1px">${s.slot.id}</td>
                                         </tr>
                                         <tr>
                                             <td style=" border-bottom: solid lightgray 1px"><b>Student group:</b></td>                                    
-                                            <td style=" border-bottom: solid lightgray 1px"><a style="color: blue" href="../student/group?class=${s.group.id}">${s.group.name}</a></td>
+                                            <td style=" border-bottom: solid lightgray 1px"><a href="../student/group?class=${s.group.id}">${s.group.name}</a></td>
                                         </tr>
                                         <tr>
                                             <td style=" border-bottom: solid lightgray 1px"><b>Instructor:</b></td>
-                                            <td style=" border-bottom: solid lightgray 1px"><a style="color: blue" href="../lecturer/info?lecturer=${s.lecturer.id}">${s.lecturer.code}</a></td>
+                                            <td style=" border-bottom: solid lightgray 1px"><a href="../lecturer/info?lecturer=${s.lecturer.id}">${s.lecturer.code}</a></td>
 
                                         </tr>
                                         <tr>

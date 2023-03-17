@@ -12,12 +12,25 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style type="text/css">
+            a {
+                color: blue;
+                text-decoration: none;
+            }
+            a:hover {
+                color: black;
+                text-decoration: underline;
+            }
+            a:active {
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <div class="container" style="margin-left: 200px">
             <div class="row" style="display: flex">
                 <div class="col-md-8" style="margin-left: 200px">
-                    <h1><span>FPT University Academic Portal</span></h1>
+                    <h1><span style="text-shadow: -5px 5px 4px #ec9b19;">FPT University Academic Portal</span></h1>
                 </div>
                 <div class="col-md-4" style="margin-left: 400px">
                     <table>
@@ -39,7 +52,7 @@
                 <div class="col-md-6" style="text-align: left; display: flex">
                     <h3 style="margin-top: 8px; margin-left: 20px"><strong>View Schedule</strong></h3></a>
                 </div>
-                <div class="col-md-6" style="margin-left: 740px">
+                <div class="col-md-6" style="margin-left: 720px">
                     <c:forEach items="${requestScope.lec}" var="l" varStatus="loop">          
                         <button style="background-color: rgb(67, 205, 128); color: white">
                             <a style="color: white" href="lecturer/info?lecturer=${l.id}">${l.account.accountName}</a>
@@ -92,7 +105,7 @@
                                     <td style="width: 120px">
                                         <c:forEach items="${requestScope.l.sessions}" var="ses">
                                             <c:if test="${ses.date eq d and ses.slot.id eq slot.id}">
-                                                <a style="color: blue" href="session/info?session=${ses.id}">${ses.course.code}</a><br/>
+                                                <a href="session/info?session=${ses.id}">${ses.course.code}</a><br/>
                                                 at ${ses.room.name} <br/>
                                                 <c:if test="${ses.status eq true}">
                                                     <a style="color: blue" href="attendance?sesid=${ses.id}">(Update)</a>

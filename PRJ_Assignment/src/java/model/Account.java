@@ -17,6 +17,7 @@ public class Account {
     private String username;
     private String password;
     private boolean role;
+    private int sessionCount;
     private Campus campus;
     ArrayList<Student> students = new ArrayList<>();
 
@@ -26,6 +27,14 @@ public class Account {
 
     public void setStudents(ArrayList<Student> students) {
         this.students = students;
+    }
+
+    public int getSessionCount() {
+        return sessionCount;
+    }
+
+    public void setSessionCount(int sessionCount) {
+        this.sessionCount = sessionCount;
     }
 
     public String getAccountName() {

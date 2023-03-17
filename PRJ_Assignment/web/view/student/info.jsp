@@ -12,12 +12,25 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style type="text/css">
+            a{
+                color: blue;
+                text-decoration: none;
+            }
+            a:hover {
+                color: black;
+                text-decoration: underline;
+            }
+            a:active {
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <div class="container" style="margin-left: 200px">
             <div class="row" style="display: flex">
                 <div class="col-md-8" style="margin-left: 200px">
-                    <h1><span>FPT University Academic Portal</span></h1>
+                    <h1><span style="text-shadow: -5px 5px 4px #ec9b19;">FPT University Academic Portal</span></h1>
                 </div>
                 <div class="col-md-4" style="margin-left: 400px">
                     <table>
@@ -37,8 +50,9 @@
             </div>
             <div class="row" style="background-color: rgb(234, 234, 234); height: 40px; width: 1100px; margin-top: 30px; margin-left: 200px; display: flex">
                 <div class="col-md-6" style="text-align: left; display: flex">
-                    <a style="margin-left: 20px;" href="../timetable"><h3 style="margin-top: 8px; color: blue"><strong>Timetable</strong></h3></a>
-                    <h3 style="margin-top: 8px; margin-left: 20px"><strong>| User detail</strong></h3></a>                </div>
+                    <a style="margin-left: 20px;" href="../timetable"><h3 style="margin-top: 8px;"><strong>Timetable</strong></h3></a>
+                    <h3 style="margin-top: 8px; margin-left: 20px"><strong>| User detail</strong></h3></a>
+                </div>
                 <div class="col-md-6" style="margin-left: 600px">
                     <c:forEach items="${requestScope.stu}" var="s" varStatus="loop">          
                         <button style="background-color: rgb(67, 205, 128); color: white">
@@ -63,7 +77,7 @@
                         <td>
                             <div>
                                 <h2 style="margin-left: 50px">User detail</h2><br/>
-                                <a href="../checkAtt" style="color: blue; margin-left: 5px"><h4 style="margin-top: 0px; margin-bottom: 0px">Course attendance</h4></a>
+                                <a href="../checkAtt" style="margin-left: 5px"><h4 style="margin-top: 0px; margin-bottom: 0px">Course attendance</h4></a>
                             </div>
                             <table>
                                 <tbody>

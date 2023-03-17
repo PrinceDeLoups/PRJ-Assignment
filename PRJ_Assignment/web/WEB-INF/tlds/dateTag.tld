@@ -23,9 +23,16 @@
     <tag>
         <name>dateTag</name>
         <tag-class>mycustom.tag.dateTag</tag-class>
-        <body-content>scriptless</body-content>
+        <body-content>empty</body-content>
         <attribute>
-            <name>dateFormat</name>
+            <name>value</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>type</name>
+            <!--<required>true</required>-->
+            <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
 </taglib>

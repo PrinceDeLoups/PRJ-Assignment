@@ -4,6 +4,7 @@
  */
 package controller.authentication;
 
+import dal.UserDBContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -21,9 +22,14 @@ public abstract class BaseRequiredAuthenticatedController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (isAuthenticated(request)) {
+            Account a = (Account) request.getSession().getAttribute("acc");
+            UserDBContext updb = new UserDBContext();
+            int count = a.getSessionCount() + 1;
+            updb.update(a.getAccID(), count);
             doGet(request, response, (Account) request.getSession().getAttribute("acc"));
         } else {
-            response.getWriter().println("access denied!");
+            response.sendRedirect("http://localhost:9999/PRJ_Assignment/accessDenied");
+//            response.getWriter().println("access denied!");
         }
     }
 
@@ -37,12 +43,13 @@ public abstract class BaseRequiredAuthenticatedController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (isAuthenticated(request)) {
-            //do business
             doPost(request, response, (Account) request.getSession().getAttribute("acc"));
         } else {
-            response.getWriter().println("access denied!");
+            response.sendRedirect("http://localhost:9999/PRJ_Assignment/accessDenied");
+//            response.getWriter().println("access denied!");
         }
     }
+
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -14,9 +14,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Date;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import model.Account;
 import model.Campus;
@@ -33,20 +34,21 @@ public class ScheduleController extends BaseRequiredAuthenticatedController {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ZoneId zonedId = ZoneId.of("Asia/Ho_Chi_Minh");
-        LocalDate today = LocalDate.now(zonedId);
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime oneWeek = now.plusDays(6);
-        LocalDate then = LocalDate.from(oneWeek);
+        LocalDateTime monday = now;
+        while (monday.getDayOfWeek() != DayOfWeek.MONDAY) {
+            monday = monday.minusDays(1);
+        }
+        LocalDate then = LocalDate.from(monday.plusDays(6));
         int id = (int) request.getSession().getAttribute("id");
         String raw_from = request.getParameter("from");
-        String raw_to = request.getParameter("to");;
+        String raw_to = request.getParameter("to");
 
         LecturerDBContext lecdb = new LecturerDBContext();
         ArrayList<Lecturer> lec = lecdb.getStdCode(id);
         request.setAttribute("lec", lec);
         Lecturer currentLec = lec.get(0);
-        
+
         CampusDBContext camp = new CampusDBContext();
         ArrayList<Campus> camps = camp.search(id);
         request.setAttribute("camps", camps);
@@ -56,7 +58,7 @@ public class ScheduleController extends BaseRequiredAuthenticatedController {
             from = Date.valueOf(raw_from);
             to = Date.valueOf(raw_to);
         } else {
-            from = Date.valueOf(today);
+            from = Date.valueOf(monday.format(DateTimeFormatter.ISO_DATE));
             to = Date.valueOf(then);
         }
         SlotDBContext timeDB = new SlotDBContext();

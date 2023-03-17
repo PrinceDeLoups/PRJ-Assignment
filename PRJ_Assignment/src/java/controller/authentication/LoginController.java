@@ -40,7 +40,7 @@ public class LoginController extends HttpServlet {
             request.getSession().setAttribute("acc", acc);
             if (acc.isRole() == true) {
                 response.sendRedirect("timetable");
-            }else{
+            } else {
                 response.sendRedirect("schedule");
             }
         } else {

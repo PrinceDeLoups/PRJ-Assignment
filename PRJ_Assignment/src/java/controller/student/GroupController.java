@@ -40,7 +40,7 @@ public class GroupController extends BaseRequiredAuthenticatedController {
             StudentDBContext studb = new StudentDBContext();
             ArrayList<Student> stu = studb.getStdCode(a);
             req.setAttribute("stu", stu);
-        }else{
+        } else {
             LecturerDBContext lecdb = new LecturerDBContext();
             ArrayList<Lecturer> lect = lecdb.getStdCode(a);
             req.setAttribute("lect", lect);
@@ -60,10 +60,13 @@ public class GroupController extends BaseRequiredAuthenticatedController {
             GroupDBContext gb = new GroupDBContext();
             ArrayList<Group> groups = gb.search(course);
             req.setAttribute("groups", groups);
-            req.setAttribute("raw_course", raw_course);
         }
         if (raw_course == null && raw_classe != null) {
             int classe = Integer.parseInt(raw_classe);
+            GroupDBContext gb = new GroupDBContext();
+            ArrayList<Group> groups = gb.searchStd(classe);
+            req.setAttribute("groups", groups);
+
             StudentDBContext db = new StudentDBContext();
             ArrayList<Student> students = db.search(classe);
             req.setAttribute("students", students);

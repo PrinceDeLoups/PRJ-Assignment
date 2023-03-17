@@ -20,7 +20,7 @@ import model.Campus;
 public class UserDBContext extends DBContext<Account> {
 
     public Account get(String username, String password, int campus) {
-        String sql = "SELECT accountID, username, [role] FROM Account\n"
+        String sql = "SELECT accountID, username, [sesionAcc], [role] FROM Account\n"
                 + "WHERE username = ? AND [password] = ? AND campusid = ?";
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -34,6 +34,7 @@ public class UserDBContext extends DBContext<Account> {
                 Account a = new Account();
                 a.setAccID(rs.getInt("accountID"));
                 a.setUsername(username);
+                a.setSessionCount(rs.getInt("sesionAcc"));
                 a.setRole(rs.getBoolean("role"));
                 Campus c = new Campus();
                 c.setId(campus);
@@ -99,6 +100,31 @@ public class UserDBContext extends DBContext<Account> {
             }
         }
         return null;
+    }
+    public void update(int id, int count) {
+        PreparedStatement stm = null;
+        try {
+            String sql = "UPDATE [Account]\n"
+                    + " SET [sesionAcc] = ?\n"
+                    + " WHERE [accountID] = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, count);
+            stm.setInt(2, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @Override

@@ -8,7 +8,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div style="text-align: center">
+        <div style="text-align: center; margin-top: 380px">
             <h1 style="color: red">Invalid username or password</h1>
             <br/>
             <b style="color: red">You will be directed to /login after <span id="time"></span> seconds</b>

@@ -12,8 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div style="text-align: center">
-
+        <div style="text-align: center; margin-top: 380px">
+             
             <h1>Log out successful!</h1>
             <br/>
             You will be directed to /login after <span id="time"></span> seconds

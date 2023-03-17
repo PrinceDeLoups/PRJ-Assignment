@@ -13,11 +13,24 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <style type="text/css">
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+        a:hover {
+            color: black;
+            text-decoration: underline;
+        }
+        a:active {
+            color: red;
+        }
+    </style>
     <body>
         <div class="container" style="margin-left: 200px">
             <div class="row" style="display: flex">
                 <div class="col-md-8" style="margin-left: 200px">
-                    <h1><span>FPT University Academic Portal</span></h1>
+                    <h1><span style="text-shadow: -5px 5px 4px #ec9b19;">FPT University Academic Portal</span></h1>
                 </div>
                 <div class="col-md-4" style="margin-left: 400px">
                     <table>
@@ -39,15 +52,15 @@
                 <div class="col-md-6" style="text-align: left; display: flex">
                     <c:if test="${requestScope.stu ne null}">
                         <c:forEach items="${requestScope.stu}" var="s" varStatus="loop">          
-                            <a style="margin-left: 20px;" href="../timetable"><h3 style="margin-top: 8px; color: blue"><strong>Timetable</strong></h3></a>
+                            <a style="margin-left: 20px;" href="../timetable"><h3 style="margin-top: 8px;"><strong>Timetable</strong></h3></a>
                         </c:forEach>
                     </c:if>
                     <c:if test="${requestScope.lect ne null}">
                         <c:forEach items="${requestScope.lect}" var="s" varStatus="loop">          
-                            <a style="margin-left: 20px;" href="../schedule"><h3 style="margin-top: 8px; color: blue"><strong>Schedule</strong></h3></a>
+                            <a style="margin-left: 20px;" href="../schedule"><h3 style="margin-top: 8px;"><strong>Schedule</strong></h3></a>
                         </c:forEach>
                     </c:if>
-                    <h3 style="margin-top: 8px; margin-left: 20px"><strong>| User detail</strong></h3></a></div>
+                    <h3 style="margin-top: 8px; margin-left: 20px"><strong>| User detail</strong></h3></div>
                 <div class="col-md-6" style="margin-left: 600px">
                     <c:if test="${requestScope.stu ne null}">
                         <c:forEach items="${requestScope.stu}" var="s" varStatus="loop">          

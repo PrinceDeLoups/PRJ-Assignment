@@ -1,6 +1,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="/WEB-INF/tlds/dateTag.tld" prefix="my"%>
 
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -15,8 +16,16 @@
             </title>
             <link rel="Stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" type="text/css" />
             <style type="text/css">
-                .style1 {
-                    font-weight: bold;
+                a {
+                    color: blue;
+                    text-decoration: none;
+                }
+                a:hover {
+                    color: black;
+                    text-decoration: underline;
+                }
+                a:active {
+                    color: red;
                 }
             </style>
 
@@ -26,7 +35,7 @@
         <div class="container" style="margin-left: 200px">
             <div class="row" style="display: flex">
                 <div class="col-md-8" style="margin-left: 200px">
-                    <h1><span>FPT University Academic Portal</span></h1>
+                    <h1><span style="text-shadow: -5px 5px 4px #ec9b19;">FPT University Academic Portal</span></h1>
                 </div>
                 <div class="col-md-4" style="margin-left: 400px">
                     <table>
@@ -47,7 +56,7 @@
             <div class="row" style="background-color: rgb(234, 234, 234); height: 40px; width: 1100px; margin-top: 30px; margin-left: 200px; display: flex">
                 <div class="col-md-6" style="text-align: left; display: flex">
                     <c:forEach items="${requestScope.stu}" var="s" varStatus="loop">          
-                        <a style="margin-left: 20px;" href="timetable"><h3 style="margin-top: 8px; color: blue"><strong>Timetable</strong></h3></a>
+                        <a style="margin-left: 20px;" href="timetable"><h3 style="margin-top: 8px;"><strong>Timetable</strong></h3></a>
                     </c:forEach>
                     <h3 style="margin-top: 8px; margin-left: 20px"><strong>| User detail</strong></h3></a>
                 </div>
@@ -86,7 +95,7 @@
                                     <table border="1">
                                         <tr>
                                             <c:forEach items="${requestScope.camps}" var="cs" varStatus="loop">
-                                                ${cs.name}
+                                                <strong>${cs.name}</strong>
                                             </c:forEach>
                                         </tr>
                                     </table> 
@@ -96,8 +105,8 @@
                                     <table border="1">
                                         <tr>
                                             <c:forEach items="${requestScope.courses}" var="c" varStatus="loop">
-                                                <input type="button" onclick="window.location.href = 'checkAtt?course=${c.id}'" value="${c.name} (${c.code})"></button><br/>
-                                                </c:forEach>
+                                                <a style="margin-bottom: 5px" href="checkAtt?course=${c.id}" name="course"><strong>${c.name}</strong> </a><strong>(${c.code})</strong><br/>
+                                            </c:forEach>
                                         </tr>
                                     </table> 
                                 </td>
@@ -132,11 +141,11 @@
                                     </td>
                                     <td valign="top">
                                         <button style="background-color: #337ab7; color: white; border: 0px">
-                                            <fmt:formatDate value="${ss.date}" pattern="EEEE"/> <fmt:formatDate value="${ss.date}" type="date"/>
-                                        </button>
-                                    </td>
-                                    <td valign="top">
-                                        <button style="background-color: #d9534f; color: white; border: 0px">
+                                            <my:dateTag value="${ss.date}" type="EEEE"></my:dateTag> <my:dateTag value="${ss.date}"></my:dateTag>
+                                            </button>
+                                        </td>
+                                        <td valign="top">
+                                            <button style="background-color: #d9534f; color: white; border: 0px">
                                             ${ss.slot.id}_${ss.slot.name}
                                         </button>
                                     </td>
