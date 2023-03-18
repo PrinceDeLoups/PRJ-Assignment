@@ -29,7 +29,6 @@ public class LecturerController extends BaseRequiredAuthenticatedController {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         int a = (int) request.getSession().getAttribute("id");
         UserDBContext udb = new UserDBContext();
         Account acc = udb.getUser(a);
