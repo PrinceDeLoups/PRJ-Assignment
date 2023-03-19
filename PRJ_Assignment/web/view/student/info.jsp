@@ -77,7 +77,7 @@
                         <td>
                             <div>
                                 <h2 style="margin-left: 50px">User detail</h2><br/>
-                                <a href="../checkAtt" style="margin-left: 5px"><h4 style="margin-top: 0px; margin-bottom: 0px">Course attendance</h4></a>
+                                <a href="../checkAtt" style="margin-left: 5px"><h3 style="margin-top: 0px; margin-bottom: 0px">Course attendance</h3></a>
                             </div>
                             <table>
                                 <tbody>

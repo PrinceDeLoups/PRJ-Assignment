@@ -19,15 +19,6 @@ public class Account {
     private boolean role;
     private int sessionCount;
     private Campus campus;
-    ArrayList<Student> students = new ArrayList<>();
-
-    public ArrayList<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(ArrayList<Student> students) {
-        this.students = students;
-    }
 
     public int getSessionCount() {
         return sessionCount;
