@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="/WEB-INF/tlds/dateTag.tld" prefix="my"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -91,12 +92,15 @@
                 <c:if test="${requestScope.dates ne null}">
                     <table style="border: 2px solid black;" border="1px"> 
                         <tr style="background-color: orange">
-                            <td></td>
+                            <th rowspan="2"></th>
+                                <c:forEach items="${requestScope.dates}" var="d">
+                                <td><b style="text-transform: uppercase"><my:dateTag value="${d}" type="EEE"></my:dateTag></b></td>
+                                </c:forEach>
+                        </tr>
+                        <tr style="background-color: orange">
                             <c:forEach items="${requestScope.dates}" var="d">
-                                <td><fmt:formatDate value="${d}" type="date"/><br/><fmt:formatDate value="${d}" pattern="EEEE"/>
-                                </td>
-                            </c:forEach>
-
+                                <td><b style="text-transform: uppercase"><my:dateTag value="${d}" type="dateMonth"></my:dateTag></b></td>
+                                </c:forEach>
                         </tr>
                         <c:forEach items="${requestScope.slots}" var="slot"> 
                             <tr>
