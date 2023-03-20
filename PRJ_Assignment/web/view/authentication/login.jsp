@@ -20,7 +20,6 @@
                                 <img src="https://fap.fpt.edu.vn/images/app-store.svg" style="width: 120px; height: 40px" alt="apple store" /></a></td>
                         <td><a href="https://play.google.com/store/apps/details?id=com.fuct">
                                 <img src="https://fap.fpt.edu.vn/images/play-store.svg" style="width: 120px; height: 40px" alt="google store" /></a></td>
-
                     </tr>
                 </table>
             </div>

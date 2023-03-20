@@ -43,12 +43,8 @@
                             <td colspan="2" class="auto-style1"><strong>FAP mobile app (myFAP) is ready at</strong></td>
                         </tr>
                         <tr>
-                            <td><a href="https://apps.apple.com/app/id1527723314">
-                                    <img src="https://fap.fpt.edu.vn/images/app-store.svg"
-                                         style="width: 120px; height: 40px" alt="apple store" /></a></td>
-                            <td><a href="https://play.google.com/store/apps/details?id=com.fuct">
-                                    <img src="https://fap.fpt.edu.vn/images/play-store.svg"
-                                         style="width: 120px; height: 40px" alt="google store" /></a></td>
+                            <td><a href=""><img src="https://fap.fpt.edu.vn/images/app-store.svg" style="width: 120px; height: 40px" alt="apple store" /></a></td>
+                            <td><a href=""><img src="https://fap.fpt.edu.vn/images/play-store.svg" style="width: 120px; height: 40px" alt="google store" /></a></td>
                         </tr>
                     </table>
                 </div>
@@ -106,7 +102,7 @@
                                         <tr>
                                             <c:forEach items="${requestScope.courses}" var="c" varStatus="loop">
                                                 <a style="margin-bottom: 5px" href="checkAtt?course=${c.id}" name="course"><strong>${c.name}</strong> </a><strong>(${c.code})</strong><br/>
-                                            </c:forEach>
+                                                    </c:forEach>
                                         </tr>
                                     </table> 
                                 </td>
