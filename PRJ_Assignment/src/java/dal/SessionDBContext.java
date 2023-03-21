@@ -23,22 +23,22 @@ import model.TimeSlot;
  * @author ADMIN
  */
 public class SessionDBContext extends DBContext {
-    
+
     @Override
     public void insert(Object model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void delete(Object model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public ArrayList<Session> all() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody 
     }
-    
+
     public ArrayList<Session> search(int sessionid) {
         ArrayList<Session> ses = new ArrayList<>();
         PreparedStatement stm = null;
@@ -55,34 +55,34 @@ public class SessionDBContext extends DBContext {
             stm = connection.prepareStatement(sql);
             stm.setInt(1, sessionid);
             rs = stm.executeQuery();
-            
+
             while (rs.next()) {
                 Session s = new Session();
                 s.setId(sessionid);
                 s.setDate(rs.getDate("date"));
                 s.setStatus(rs.getBoolean("status"));
-                
+
                 Group g = new Group();
                 g.setId(rs.getInt("gid"));
                 g.setName(rs.getString("gname"));
                 s.setGroup(g);
-                
+
                 Course c = new Course();
                 c.setId(rs.getInt("cid"));
                 c.setCode(rs.getString("ccode"));
                 c.setName(rs.getString("cname"));
                 s.setCourse(c);
-                
+
                 Lecturer l = new Lecturer();
                 l.setId(rs.getInt("lid"));
                 l.setName(rs.getString("lname"));
                 l.setCode(rs.getString("lcode"));
                 s.setLecturer(l);
-                
+
                 TimeSlot ts = new TimeSlot();
                 ts.setId(rs.getInt("tid"));
                 s.setSlot(ts);
-                
+
                 ses.add(s);
             }
         } catch (SQLException ex) {
@@ -93,7 +93,7 @@ public class SessionDBContext extends DBContext {
             } catch (SQLException ex) {
                 Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             try {
                 stm.close();
             } catch (SQLException ex) {
@@ -107,7 +107,7 @@ public class SessionDBContext extends DBContext {
         }
         return ses;
     }
-    
+
     public ArrayList<Session> checkAtt(int cid, int sid) {
         ArrayList<Session> ses = new ArrayList<>();
         PreparedStatement stm = null;
@@ -128,35 +128,35 @@ public class SessionDBContext extends DBContext {
             stm.setInt(1, sid);
             stm.setInt(2, cid);
             rs = stm.executeQuery();
-            
+
             while (rs.next()) {
                 Session ss = new Session();
                 ss.setId(rs.getInt("sessionid"));
                 ss.setDate(rs.getDate("date"));
                 ss.setStatus(rs.getBoolean("status"));
-                
+
                 Room r = new Room();
                 r.setName(rs.getString("rname"));
                 ss.setRoom(r);
-                
+
                 Group g = new Group();
                 g.setName(rs.getString("gname"));
                 ss.setGroup(g);
-                
+
                 Lecturer l = new Lecturer();
                 l.setCode(rs.getString("lcode"));
                 ss.setLecturer(l);
-                
+
                 TimeSlot ts = new TimeSlot();
                 ts.setId(rs.getInt("tid"));
                 ts.setName(rs.getString("description"));
                 ss.setSlot(ts);
-                
+
                 Attendance a = new Attendance();
                 a.setStatus(rs.getBoolean("astatus"));
                 a.setDescription(rs.getString("adescription"));
                 ss.setAttendance(a);
-                
+
                 ses.add(ss);
             }
         } catch (SQLException ex) {
@@ -167,7 +167,7 @@ public class SessionDBContext extends DBContext {
             } catch (SQLException ex) {
                 Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             try {
                 stm.close();
             } catch (SQLException ex) {
@@ -181,7 +181,7 @@ public class SessionDBContext extends DBContext {
         }
         return ses;
     }
-    
+
     public ArrayList<Session> searchBySession(int sessionid, int sid) {
         ArrayList<Session> ses = new ArrayList<>();
         PreparedStatement stm = null;
@@ -200,37 +200,37 @@ public class SessionDBContext extends DBContext {
             stm.setInt(1, sessionid);
             stm.setInt(2, sid);
             rs = stm.executeQuery();
-            
+
             while (rs.next()) {
                 Session s = new Session();
                 s.setId(sessionid);
                 s.setDate(rs.getDate("date"));
                 s.setStatus(rs.getBoolean("status"));
-                
+
                 Attendance a = new Attendance();
                 a.setStatus(rs.getBoolean("astatus"));
                 s.setAttendance(a);
-                
+
                 Group g = new Group();
                 g.setId(rs.getInt("gid"));
                 g.setName(rs.getString("gname"));
                 s.setGroup(g);
-                
+
                 Course c = new Course();
                 c.setCode(rs.getString("ccode"));
                 c.setName(rs.getString("cname"));
                 s.setCourse(c);
-                
+
                 Lecturer l = new Lecturer();
                 l.setId(rs.getInt("lid"));
                 l.setName(rs.getString("lname"));
                 l.setCode(rs.getString("lcode"));
                 s.setLecturer(l);
-                
+
                 TimeSlot ts = new TimeSlot();
                 ts.setId(rs.getInt("tid"));
                 s.setSlot(ts);
-                
+
                 ses.add(s);
             }
         } catch (SQLException ex) {
@@ -241,7 +241,76 @@ public class SessionDBContext extends DBContext {
             } catch (SQLException ex) {
                 Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
+            try {
+                stm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return ses;
+    }
+
+    public ArrayList<Session> countSes(int cid, int gid) {
+        ArrayList<Session> ses = new ArrayList<>();
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT s.sessionid, s.gid, s.cid, s.tid, s.rid, s.lid, s.[date], s.[status], c.cname, c.ccode, g.gname, l.lname, l.lcode\n"
+                    + "FROM [Session] s INNER JOIN [Group] g\n"
+                    + "ON g.gid = s.gid\n"
+                    + "INNER JOIN Course c\n"
+                    + "ON s.cid = c.cid\n"
+                    + "INNER JOIN Lecturer l\n"
+                    + "on l.lid = s.lid\n"
+                    + "WHERE s.cid = ? AND s.gid = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, cid);
+            stm.setInt(2, gid);
+            rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Session s = new Session();
+                s.setDate(rs.getDate("date"));
+                s.setStatus(rs.getBoolean("status"));
+
+                Group g = new Group();
+                g.setId(rs.getInt("gid"));
+                g.setName(rs.getString("gname"));
+                s.setGroup(g);
+
+                Course c = new Course();
+                c.setId(rs.getInt("cid"));
+                c.setCode(rs.getString("ccode"));
+                c.setName(rs.getString("cname"));
+                s.setCourse(c);
+
+                Lecturer l = new Lecturer();
+                l.setId(rs.getInt("lid"));
+                l.setName(rs.getString("lname"));
+                l.setCode(rs.getString("lcode"));
+                s.setLecturer(l);
+
+                TimeSlot ts = new TimeSlot();
+                ts.setId(rs.getInt("tid"));
+                s.setSlot(ts);
+
+                ses.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             try {
                 stm.close();
             } catch (SQLException ex) {

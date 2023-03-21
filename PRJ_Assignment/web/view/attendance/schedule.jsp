@@ -113,6 +113,10 @@
                                                 <c:if test="${ses.status eq false}">
                                                     <a style="color: red" href="attendance?sesid=${ses.id}">(Take attendance)</a>
                                                 </c:if>
+                                                <br/>
+                                                <button style="background-color: steelblue; color: white">
+                                                    <a style="color: white" href="statistic?session=${ses.id}">Attendance detail</a>
+                                                </button>
                                                 <button style="background-color: rgb(67, 205, 128); color: white">
                                                     ${ses.slot.name}
                                                 </button>

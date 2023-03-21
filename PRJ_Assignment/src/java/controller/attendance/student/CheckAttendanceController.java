@@ -7,7 +7,6 @@ package controller.attendance.student;
 import controller.authentication.BaseRequiredAuthenticatedController;
 import dal.CampusDBContext;
 import dal.CourseDBContext;
-import dal.DBContext;
 import dal.SessionDBContext;
 import dal.StudentDBContext;
 import java.io.IOException;

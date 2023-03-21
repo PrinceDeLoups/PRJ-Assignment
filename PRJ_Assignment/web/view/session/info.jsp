@@ -157,10 +157,10 @@
                                             <tr>
                                                 <td style=" border-bottom: solid lightgray 1px"><b>Attendance:</b></td>
                                                 <c:if test="${s.status eq true}">
-                                                    <td style=" border-bottom: solid lightgray 1px"><a href="attendance?sesid=${s.id}">Update</a></td>
+                                                    <td style=" border-bottom: solid lightgray 1px"><a href="../attendance?sesid=${s.id}">Update</a></td>
                                                 </c:if>
                                                 <c:if test="${s.status eq false}">
-                                                    <td style=" border-bottom: solid lightgray 1px"><a href="attendance?sesid=${ses.id}">Take attendance</a></td>
+                                                    <td style=" border-bottom: solid lightgray 1px"><a href="../attendance?sesid=${s.id}">Take attendance</a></td>
                                                 </c:if>
                                             </tr>
                                         </c:if>
